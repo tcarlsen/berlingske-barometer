@@ -1,0 +1,25 @@
+menu-header
+  .menu-tab(ng-class="{active: active_poll=='one'}" ng-click="active_poll='one'") MÅLING A
+  .menu-tab(ng-class="{active: active_poll=='two'}" ng-click="active_poll='two'") MÅLING B
+  menu-helper &nbsp; TRÆK MIG RUNDT
+  .close(ng-click="showMenu=false") &times;
+  .clearfix
+h5 {{selected[active_poll].name | pollname}} {{selected[active_poll].datetime | date:'longDate'}}
+.menu-info {{selected[active_poll].result.respondents | number}} respondenter
+  i.fa.fa-angle-down(ng-hide="showPollInfo" ng-click="showPollInfo = true")
+  i.fa.fa-angle-up(ng-show="showPollInfo" ng-click="showPollInfo = false")
+  .menu-info-inner(ng-show="showPollInfo") {{selected[active_poll].result.description | polldescription:selected[active_poll].name}}
+menu-selectors
+  .selector
+    ul.institute
+      li.institute(ng-click="choseInstitute(-1)" ng-class="{active: active_institute==10}") VÆGTET GNS.
+      li.institute(ng-repeat="institute in institutes" ng-click="choseInstitute($index)" ng-class="{active: active_institute==institute.id}") {{institute.name}}
+  .selector
+    year-selector
+      i.fa.fa-caret-left(ng-click="yearScroll('left')")
+      year-carousel
+        year(ng-repeat="year in years") {{year}}
+      i.fa.fa-caret-right(ng-click="yearScroll('right')")
+    ul.date
+      li.date(ng-repeat="poll in pollList" ng-click="setNewPoll($index)") {{poll.datetime | polldate | date:'d. MMMM'}}
+  .clearfix

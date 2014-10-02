@@ -1,0 +1,390 @@
+$total-chart-width: 220px;
+$charts-margin: 40;
+
+%column-percent {
+  font: {
+    size: 14px;
+    weight: bold;
+  }
+}
+
+berlingske-barometer {
+  position: relative;
+  display: block;
+  margin-top: 15px;
+
+  button {
+    &:hover {
+      opacity: 0.8;
+    }
+
+    &:focus, &:focus:active {
+      outline: none !important;
+    }
+  }
+
+  nav {
+    poll-info {
+      p {
+        display: inline-block;
+      }
+
+      strong {
+        display: inline-block;
+      }
+    }
+
+    .btn {
+      font-size: 14px;
+      border: 1px solid #bcbec0;
+      background: #e6e7e8;
+      border-radius: 0px;
+      padding: 6px;
+
+      span {
+        background: #000;
+        color: #fff;
+        padding: 3px 12px;
+      }
+    }
+
+    .btn-round {
+      border-radius: 50%;
+      padding: 3px;
+
+      span {
+        border-radius: 50%;
+        padding: 1px 8px;
+      }
+    }
+
+    .right-menu {
+      float: right;
+
+      @media (max-width: 420px) {
+        margin-top: 5px;
+        margin-bottom: 5px;
+        float: left;
+      }
+
+      .switcher {
+        display: inline-block;
+        vertical-align: middle;
+        margin-left: 5px;
+
+        @media (max-width: 420px) {
+          margin-left: 0;
+        }
+
+        .btn {
+          float: left;
+
+        }
+      }
+    }
+  }
+
+  party-chart {
+    width: 100%;
+    // .container { width: 750px; }
+    @media (min-width: 768px) {
+      &.percent {
+        width: 720px - $total-chart-width - $charts-margin;
+      }
+    }
+    // .container { width: 970px; }
+    @media (min-width: 992px) {
+      &.percent,
+      &.mandates {
+        width: 940px - $total-chart-width - $charts-margin;
+      }
+    }
+    // .container { width: 1170px; }
+    @media (min-width: 1200px) {
+      &.percent,
+      &.mandates {
+        width: 1140px - $total-chart-width - $charts-margin;
+      }
+    }
+
+    .party-percent {
+      @extend %column-percent;
+    }
+
+    .slice {
+      stroke: #fff;
+      stroke-width: 2px;
+    }
+
+    .texts {
+      font: {
+        size: 15px;
+        weight: bold;
+      }
+    }
+
+    .axis {
+      &.y {
+        path {
+          display: none;
+          fill-opacity: 0.2;
+        }
+
+        line {
+          stroke: #999;
+          stroke-width: 1;
+          fill: none;
+        }
+
+        text {
+          font-size: 14px;
+        }
+
+        g:first-child {
+          text {
+            display: none;
+          }
+        }
+      }
+    }
+  }
+
+  total-chart {
+    width: $total-chart-width;
+
+    @media (max-width: 767px) {
+      width: 100%;
+    }
+
+    @media (max-width: 991px) {
+      &.mandates {
+        width: 100%;
+
+        svg {
+          height: 135px;
+        }
+      }
+    }
+
+    @media (max-width: 380px) {
+      &.mandates {
+        svg {
+          height: 265px
+        }
+      }
+    }
+
+    .block-percent {
+      @extend %column-percent;
+    }
+
+    .slice {
+      stroke: #fff;
+      stroke-width: 2px;
+    }
+
+    .block-letters {
+      font: {
+        weight: bold;
+        size: 22px;
+      }
+      fill: #ffffff;
+    }
+  }
+
+  poll-menu {
+    $width: 300px;
+    $selectorMargin: 10px;
+    $selectorWidth: ($width - ($selectorMargin * 3)) / 2;
+    $selectorHeight: 250px;
+    $carouselMargin: 20px;
+
+    position: absolute;
+    top: 140px;
+    width: $width + 2;
+    left: 0;
+    transform: translate3d(0, 0, 0);
+    border: 1px solid #000;
+    background: #fff;
+
+    menu-header {
+      display: block;
+      user-select: none;
+      font-size: 12px;
+
+      .menu-tab {
+        float: left;
+        cursor: pointer;
+        background: #000;
+        color: #fff;
+        padding: 7px 12px;
+
+        &.active {
+          background: #fff;
+          color: #000;
+        }
+      }
+
+      menu-helper {
+        position: absolute;
+        top: 5px;
+        right: 35px;
+        cursor: move;
+        font-weight: lighter;
+
+        &:before {
+          font-family: FontAwesome;
+          content: "\f047";
+        }
+      }
+
+      .close {
+        position: absolute;
+        top: 0px;
+        right: 5px;
+        font-weight: lighter;
+      }
+    }
+
+    h5 {
+      padding: 2px 12px;
+
+      text-transform: uppercase;
+    }
+
+    .menu-info {
+      background: #666;
+      color: #fff;
+      padding: 2px 12px;
+      font-size: 14px;
+
+      i {
+        float: right;
+        cursor: pointer;
+        user-select: none;
+      }
+
+      .menu-info-inner {
+        font-size: 12px;
+      }
+    }
+
+    menu-selectors {
+      .selector {
+        width: $selectorWidth;
+        background: #000;
+        color: #fff;
+        user-select: none;
+        margin: $selectorMargin;
+        float: left;
+        font: {
+          size: 12px;
+          weight: lighter;
+        }
+
+        &:first-child {
+          margin-right: 0;
+        }
+
+        ul {
+          list-style-type: none;
+          padding: 0;
+          display: block;
+          height: $selectorHeight;
+          overflow-y: scroll;
+
+          &.date {
+            height: $selectorHeight - 35;
+          }
+        }
+
+        li {
+          padding: 2px 2px 2px 10px;
+          text-transform: uppercase;
+          cursor: pointer;
+
+          &.institute:before {
+            font-family: FontAwesome;
+            content: "\f096";
+            margin-right: 8px;
+          }
+
+          &.active {
+            font-weight: bold;
+
+            &.institute:before {
+              content: "\f0c8";
+            }
+          }
+        }
+      }
+    }
+
+    year-selector {
+      width: $selectorWidth;
+      height: 30px;
+
+      position: relative;
+      margin-bottom: 5px;
+      display: block;
+
+      i {
+        color: #fff;
+        position: absolute;
+        top: -2px;
+        cursor: pointer;
+        font-size: 35px;
+        z-index: 100;
+
+        &:first-child {
+          left: 5px;
+        }
+
+        &:last-child {
+          right: 5px;
+        }
+      }
+
+      year-carousel {
+        $left-pos: 15px;
+
+        position: absolute;
+        top: 0px;
+        left: $carouselMargin;
+        width: $selectorWidth - ($carouselMargin * 2);
+        overflow-x: hidden;
+        overflow-y: hidden;
+        white-space: nowrap;
+
+        year {
+          width: $selectorWidth - ($carouselMargin * 2);
+          display: inline-block;
+          background: transparent;
+          text-align: center;
+          font: {
+            size: 20px;
+            weight: bold;
+          }
+        }
+      }
+    }
+  }
+
+  app-info {
+    position: absolute;
+    top: 40px;
+    right: 0;
+    width: 350px;
+    padding: 25px 10px 0 10px;
+    background: #fff;
+    border: 1px solid #000;
+    font-size: 12px;
+
+    .close {
+      position: absolute;
+      top: -4px;
+      right: 4px;
+      font-weight: lighter;
+    }
+  }
+}

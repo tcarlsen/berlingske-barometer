@@ -1,0 +1,6 @@
+strong(ng-show="view=='mandates'") (A) &nbsp;
+strong {{selected.one.name | pollname}} {{selected.one.datetime | date:'longDate'}}
+p.visible-xs-inline-block /
+p.hidden-xs SAMMENLIGNET MED &nbsp;
+strong(ng-show="view=='mandates'") (B) &nbsp;
+strong {{selected.two.name | pollname}} {{selected.two.datetime | date:'longDate'}}
