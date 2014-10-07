@@ -272,6 +272,9 @@ angular.module "partyChartDirective", []
 
         pollOneTexts
           .text (d, i) -> d.data.mandates
+          .attr "display", (d) ->
+            return "none" if d.data.mandates is "0"
+            return "block"
           .transition().duration(1000)
             .attr "transform", (d) -> "translate(#{pollOneArc.centroid(d)})"
 
@@ -298,6 +301,9 @@ angular.module "partyChartDirective", []
 
         pollTwoTexts
           .text (d, i) -> d.data.mandates
+          .attr "display", (d) ->
+            return "none" if d.data.mandates is "0"
+            return "block"
           .transition().duration(1000)
             .attr "transform", (d) -> "translate(#{pollTwoArc.centroid(d)})"
 
@@ -314,6 +320,9 @@ angular.module "partyChartDirective", []
             .attr 'height', logoSize
 
         partyLogos
+          .attr "display", (d) ->
+            return "none" if d.data.mandates is "0"
+            return "block"
           .transition().duration(1000)
             .attr "x", (d) ->
               c = pollOneArc.centroid(d)
