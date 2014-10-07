@@ -374,6 +374,6 @@ angular.module "partyChartDirective", []
               .attr "y", frameHight - pollTwoDonutInnerRadius + logoMargin + 10
               .attr "font-weight", "bold"
               .attr "font-size", "16px"
-              .text "90 mandater"
+              .text "Flertal"
 
         firstRun = false
