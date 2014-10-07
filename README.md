@@ -1,6 +1,6 @@
 # Berlingske Barometer
 
-![preview](https://dl.dropboxusercontent.com/u/2714001/embeded/berlingske-barometer.png)
+![preview](https://cloud.githubusercontent.com/assets/145288/4542732/e5978c5c-4e24-11e4-99a2-a9192914921f.png)
 
 
 ## Contribute
