@@ -28,19 +28,13 @@ angular.module "totalChartDirective", []
         baseSvg.selectAll("*").remove()
         render scope.data, scope.view
 
-      scope.$watch "data", ((newData, oldData) ->
-        return if angular.equals(newData, oldData)
-
+      scope.$watchCollection "data", (newData, oldData) ->
         render newData, scope.view
-      ), true
 
-      scope.$watch "view", ((newView, oldView) ->
-        return if angular.equals(newView, oldView)
-
+      scope.$watch "view", (newView, oldView) ->
         firstRun = true
         baseSvg.selectAll("*").remove()
         render scope.data, newView
-      ), true
 
       render = (data, view) ->
         renderColumnView(data) if view is "percent"
