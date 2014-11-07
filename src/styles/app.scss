@@ -214,6 +214,7 @@ berlingske-barometer {
     transform: translate3d(0, 0, 0);
     border: 1px solid #000;
     background: #fff;
+    z-index: 10;
 
     menu-header {
       display: block;
