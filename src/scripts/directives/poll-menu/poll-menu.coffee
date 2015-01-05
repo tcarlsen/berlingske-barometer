@@ -43,8 +43,13 @@ angular.module "pollMenuDirective", []
 
       getPollDates = ->
         pollGetter.get(activeYear, "#{scope.active_institute}.xml").then (data) ->
-          scope.pollList = data.json.polls.poll
-          scope.pollList = [scope.pollList] if !scope.pollList.length
+          if data.error
+            activeYear -= 1
+            scope.years = [activeYear..2010]
+            getPollDates()
+          else
+            scope.pollList = data.json.polls.poll
+            scope.pollList = [scope.pollList] if !scope.pollList.length
 
       scope.active_poll = "one"
       scope.active_institute = 10

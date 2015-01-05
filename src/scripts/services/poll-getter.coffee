@@ -8,8 +8,12 @@ angular.module "pollGetterService", []
         transformResponse: (data) ->
           x2js = new X2JS()
           return x2js.xml_str2json(data)
-      .then (response) ->
+      .then ((response) ->
         return {
           json: response.data.result
           year: year
+        }
+      ), (data) ->
+        return {
+          error: data.status
         }
