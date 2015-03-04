@@ -16,6 +16,7 @@ angular.module "partyChartDirective", []
       partyColors =
         first:
           "Ø": "#731525"
+          "Å": "#5AFF5A"
           F: "#9C1D2A"
           A: "#E32F3B"
           B: "#E52B91"
@@ -26,6 +27,7 @@ angular.module "partyChartDirective", []
           K: "#F0AC55"
         second:
           "Ø": "#93494E"
+          "Å": "#ACFFAC"
           F: "#B04B53"
           A: "#E54F5A"
           B: "#EC43A2"
