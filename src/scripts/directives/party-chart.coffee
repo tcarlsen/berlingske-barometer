@@ -67,6 +67,27 @@ angular.module "partyChartDirective", []
       renderColumnView = (data, key) ->
         return if !data.one or !data.two
 
+        big = null
+        small = null
+
+        if data.one.entries.length > data.two.entries.length
+          big = "one"
+          small = "two"
+        else if data.one.entries.length < data.two.entries.length
+          big = "two"
+          small = "one"
+
+        if big and small
+          loopCount = data[big].entries.length - 1
+
+          for i in [0..loopCount]
+            if data[small].entries[i].party.letter isnt data[big].entries[i].party.letter
+              data[small].entries.splice i, 0, {
+                "percent": 0
+                "mandates": "0"
+                "party": data[big].entries[i].party
+              }
+
         if firstRun
           svg = baseSvg.append("g").attr "transform", "translate(#{svgPadding.left}, #{svgPadding.top})"
         else
@@ -125,6 +146,8 @@ angular.module "partyChartDirective", []
             .attr "height", (d) -> svgHeight - yScale(d[key])
             .attr "y", (d) -> yScale d[key]
 
+        pollOne.exit().remove()
+
         pollTwo = svg.selectAll(".poll-two.column").data(data.two.entries)
 
         pollTwo
@@ -141,6 +164,8 @@ angular.module "partyChartDirective", []
           .transition().duration(1000)
             .attr "height", (d) -> svgHeight - yScale(d[key])
             .attr "y", (d) -> yScale d[key]
+
+        pollTwo.exit().remove()
 
         pollOnePercent = svg.selectAll(".poll-one.party-percent").data(data.one.entries)
 
@@ -209,6 +234,27 @@ angular.module "partyChartDirective", []
 
       renderDonutView = (data) ->
         return if !data.one or !data.two
+
+        big = null
+        small = null
+
+        if data.one.entries.length > data.two.entries.length
+          big = "one"
+          small = "two"
+        else if data.one.entries.length < data.two.entries.length
+          big = "two"
+          small = "one"
+
+        if big and small
+          loopCount = data[big].entries.length - 1
+
+          for i in [0..loopCount]
+            if data[small].entries[i].party.letter isnt data[big].entries[i].party.letter
+              data[small].entries.splice i, 0, {
+                "percent": 0
+                "mandates": "0"
+                "party": data[big].entries[i].party
+              }
 
         svgWidth = d3.select(element[0])[0][0].offsetWidth
 
