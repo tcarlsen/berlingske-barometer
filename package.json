@@ -1,6 +1,6 @@
 {
   "name": "berlingske-barometer",
-  "version": "0.1.2",
+  "version": "0.2.0",
   "description": "a webtool for politiko.dk",
   "author": "tcarlsen",
   "devDependencies": {

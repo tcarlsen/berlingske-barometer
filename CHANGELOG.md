@@ -1,4 +1,10 @@
 
+0.2.0 / 2015-03-16
+==================
+
+  * fixes mandate view with new party
+  * adding support for the party "Alternativet"
+
 0.1.2 / 2015-01-05
 ==================
 
