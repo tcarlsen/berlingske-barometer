@@ -98,6 +98,10 @@ gulp.task('connect', function () {
     livereload: true
   });
 });
+/* CORS Proxy */
+gulp.task('corsproxy', function () {
+  require('corsproxy/bin/index');
+});
 /* Build task */
 gulp.task('build', function () {
   build = true;
@@ -106,4 +110,4 @@ gulp.task('build', function () {
   gulp.start('scripts', 'styles', 'dom', 'images');
 });
 /* Default task */
-gulp.task('default', ['connect', 'scripts', 'styles', 'dom', 'images', 'watch']);
+gulp.task('default', ['corsproxy', 'connect', 'scripts', 'styles', 'dom', 'images', 'watch']);
