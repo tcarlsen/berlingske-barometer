@@ -81,7 +81,13 @@ angular.module "partyChartDirective", []
           loopCount = data[big].entries.length - 1
 
           for i in [0..loopCount]
-            if data[small].entries[i].party.letter isnt data[big].entries[i].party.letter
+            if !data[small].entries.hasOwnProperty i
+              data[small].entries.splice i, 0, {
+                "percent": 0
+                "mandates": "0"
+                "party": data[big].entries[i].party
+              }
+            else if data[small].entries[i].party.letter isnt data[big].entries[i].party.letter
               data[small].entries.splice i, 0, {
                 "percent": 0
                 "mandates": "0"
