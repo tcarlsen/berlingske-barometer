@@ -1,15 +1,14 @@
 angular.module "pollSorterService", []
-  .service "pollSorter", ($filter) ->
+  .service "pollSorter", ->
     sort: (data) ->
-      poll = {}
-      firstBlock =
+      poll =
         entries: []
+      firstBlock =
         letters: []
         total:
           percent: 0
           mandates: 0
       secondBlock =
-        entries: []
         letters: []
         total:
           percent: 0
@@ -21,13 +20,13 @@ angular.module "pollSorterService", []
       for entry in poll.result.entries.entry
         supports = parseInt(entry.supports)
 
+        poll.entries.push(entry)
+
         if supports is 1 or supports is 9
-          firstBlock.entries.push(entry)
           firstBlock.letters.push(entry.party.letter)
           firstBlock.total.percent += parseFloat entry.percent
           firstBlock.total.mandates += parseFloat entry.mandates
         else if supports is 2
-          secondBlock.entries.push(entry)
           secondBlock.letters.push(entry.party.letter)
           secondBlock.total.percent += parseFloat entry.percent
           secondBlock.total.mandates += parseFloat entry.mandates
@@ -35,11 +34,7 @@ angular.module "pollSorterService", []
         if supports is 9
           ruler = "red" if entry.party.letter is "A"
 
-      firstBlock.entries = $filter('orderBy')(firstBlock.entries, 'party.letter')
-      secondBlock.entries = $filter('orderBy')(secondBlock.entries, 'party.letter')
-
       if ruler is "red"
-        poll.entries = firstBlock.entries.concat secondBlock.entries
         poll.totals = [
           {
             percent: firstBlock.total.percent.toFixed(1)
@@ -59,7 +54,6 @@ angular.module "pollSorterService", []
           }
         ]
       else
-        poll.entries = secondBlock.entries.concat firstBlock.entries
         poll.totals = [
           {
             percent: secondBlock.total.percent
@@ -78,5 +72,24 @@ angular.module "pollSorterService", []
             letters: firstBlock.letters.sort().join("")
           }
         ]
+
+      poll.entries.sort (a, b) ->
+        a = a.party.letter
+        b = b.party.letter
+
+        getInt = (c) ->
+          c = c.toLowerCase().charCodeAt(0)
+
+          switch c
+            when 229 then 299 #å
+            when 248 then 298 #ø
+            when 230 then 297 #æ
+            else c
+
+        d = getInt(a)
+        e = getInt(b)
+
+        if d isnt e
+          return d - e
 
       return poll
