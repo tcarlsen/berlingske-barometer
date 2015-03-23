@@ -85,12 +85,14 @@ angular.module "partyChartDirective", []
               data[small].entries.splice i, 0, {
                 "percent": 0
                 "mandates": "0"
+                "uncertainty": 0
                 "party": data[big].entries[i].party
               }
             else if data[small].entries[i].party.letter isnt data[big].entries[i].party.letter
               data[small].entries.splice i, 0, {
                 "percent": 0
                 "mandates": "0"
+                "uncertainty": 0
                 "party": data[big].entries[i].party
               }
 
@@ -219,6 +221,37 @@ angular.module "partyChartDirective", []
             .transition().duration(1000)
               .attr "y", (d) -> yScale(d[key]) - 7
 
+        pollOneUncertainty = svg.selectAll(".poll-one.party-uncertainty").data(data.one.entries)
+
+        pollOneUncertainty
+          .enter()
+            .append "rect"
+              .attr "class", "poll-one party-uncertainty ng-hide"
+              .attr "height", 0
+              .attr "y", (d) -> yScale d[key]
+
+        pollOneUncertainty
+          .attr "width", columnWidth
+          .attr "x", (d, i) -> (i * columnMargin) + (svgPadding.left / 2)
+          .transition().duration(1000)
+            .attr "height", (d) -> svgHeight - yScale d['uncertainty']
+            .attr "y", (d) -> yScale d[key]
+
+        pollTwoUncertainty = svg.selectAll(".poll-two.party-uncertainty").data(data.two.entries)
+
+        pollTwoUncertainty
+          .enter()
+            .append "rect"
+              .attr "class", "poll-two party-uncertainty ng-hide"
+              .attr "height", 0
+              .attr "y", (d) -> yScale d[key]
+
+        pollTwoUncertainty
+          .attr "width", columnWidth
+          .attr "x", (d, i) -> (i * columnMargin) + (svgPadding.left / 2) + (columnWidth + compareMargin)
+          .transition().duration(1000)
+            .attr "height", (d) -> svgHeight - yScale d['uncertainty']
+            .attr "y", (d) -> yScale d[key]
 
         partyLogos = svg.selectAll(".party-logos").data(data.one.entries)
 

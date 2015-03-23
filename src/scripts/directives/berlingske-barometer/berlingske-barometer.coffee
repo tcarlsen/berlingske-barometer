@@ -8,6 +8,12 @@ angular.module "berlingskeBarometerDirective", []
       currentYear = new Date().getFullYear()
 
       scope.switchView = (view) -> $rootScope.view = view
+      scope.showUncertainty = ->
+        rects = document.getElementsByClassName "party-uncertainty"
+
+        for i of rects
+          if rects.hasOwnProperty i
+            angular.element(rects[i]).toggleClass "ng-hide"
 
       getLatestPoll = (year) ->
         pollGetter.get(year, "10.xml").then (data) ->

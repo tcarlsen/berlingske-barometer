@@ -3,12 +3,16 @@ nav(role="navigation")
       span VÆLG MÅLING
   poll-info.visible-lg-inline-block
   div.right-menu
+    button.btn.btn-round.hidden-xs(ng-click="showUncertainty()")
+      span ±
     button.btn.btn-round.hidden-xs(ng-click="showAppInfo=true")
       span
         i.fa.fa-info
     div.switcher
       button.btn(type="button" ng-class="{active: view=='mandates'}" ng-click="switchView('mandates')") VIS MANDATER
       button.btn(type="button" ng-class="{active: view=='percent'}" ng-click="switchView('percent')") VIS PROCENTER
+    button.btn.btn-round.visible-xs-inline-block(ng-click="showUncertainty()")
+      span ±
     button.btn.btn-round.visible-xs-inline-block(ng-click="showAppInfo=true")
       span
         i.fa.fa-info
