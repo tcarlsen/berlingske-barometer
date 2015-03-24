@@ -12,7 +12,8 @@ h5 {{selected[active_poll].name | pollname}} {{selected[active_poll].datetime | 
 menu-selectors
   .selector
     ul.institute
-      li.institute(ng-click="choseInstitute(-1)" ng-class="{active: active_institute==10}") VÆGTET GNS.
+      li.institute(ng-click="choseInstitute(-1, 10)" ng-class="{active: active_institute==10}") VÆGTET GNS.
+      li.institute(ng-click="choseInstitute(-1, 'all')" ng-class="{active: active_institute=='all'}") SENESTE
       li.institute(ng-repeat="institute in institutes" ng-click="choseInstitute($index)" ng-class="{active: active_institute==institute.id}") {{institute.name}}
   .selector
     year-selector
@@ -21,5 +22,7 @@ menu-selectors
         year(ng-repeat="year in years") {{year}}
       i.fa.fa-caret-right(ng-click="yearScroll('right')")
     ul.date
-      li.date(ng-repeat="poll in pollList" ng-click="setNewPoll($index)") {{poll.datetime | polldate | date:'d. MMMM'}}
+      li.date(ng-repeat="poll in pollList" ng-click="setNewPoll($index)") 
+        | {{poll.datetime | polldate | date:'d. MMMM'}}
+        small(ng-show="active_institute=='all'") &nbsp;({{poll.name}})
   .clearfix

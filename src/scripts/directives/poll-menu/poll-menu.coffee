@@ -48,19 +48,25 @@ angular.module "pollMenuDirective", []
             scope.years = [activeYear..2010]
             getPollDates()
           else
-            scope.pollList = data.json.polls.poll
+            if data.json.hasOwnProperty "polls"
+              scope.pollList = data.json.polls.poll
+            else
+              scope.pollList = data.json.poll
+
+            console.log scope.pollList
+
             scope.pollList = [scope.pollList] if !scope.pollList.length
 
       scope.active_poll = "one"
       scope.active_institute = 10
       scope.years = [currentYear..2010]
 
-      scope.choseInstitute = (index) ->
+      scope.choseInstitute = (index, id) ->
         element.find("year-carousel")[0].scrollLeft = 0
 
         if index is -1
           activeYear = currentYear
-          scope.active_institute = 10
+          scope.active_institute = id
           scope.years = [currentYear..2010]
 
           getPollDates()
@@ -88,10 +94,11 @@ angular.module "pollMenuDirective", []
 
         if scope.active_institute is 10
           $rootScope.selected[scope.active_poll].name = "Berlingske Poll of Polls"
+        else if scope.active_institute is "all"
+          $rootScope.selected[scope.active_poll].name = $rootScope.selected[scope.active_poll].result.name
         else
           for institute in scope.institutes
             $rootScope.selected[scope.active_poll].name = institute.name if institute.id is scope.active_institute
-
 
       scope.yearScroll = (direction) ->
         carouselEle = element.find "year-carousel"
