@@ -1,6 +1,7 @@
 /*jslint indent:2, node:true, sloppy:true*/
 var
   gulp = require('gulp'),
+  del = require('del'),
   coffee = require('gulp-coffee'),
   ngannotate = require('gulp-ng-annotate'),
   rename = require("gulp-rename"),
@@ -107,6 +108,7 @@ gulp.task('build', function () {
   build = true;
   dest = 'build';
 
+  del(dest);
   gulp.start('scripts', 'styles', 'dom', 'images');
 });
 /* Default task */
