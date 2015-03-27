@@ -53,8 +53,6 @@ angular.module "pollMenuDirective", []
             else
               scope.pollList = data.json.poll
 
-            console.log scope.pollList
-
             scope.pollList = [scope.pollList] if !scope.pollList.length
 
       scope.active_poll = "one"
