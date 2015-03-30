@@ -1,4 +1,16 @@
 
+0.3.0 / 2015-03-30
+=========================
+
+  * new logo for K
+  * adding "latest" list to the menu
+  * updating "alternativet" logo
+  * adding uncertainty
+  * fixing view after new sorted view
+  * parties are now sorted by party letter
+  * adding corsproxy to the default gulp task
+  * updating the gulp file and all the dependencies
+
 0.2.0 / 2015-03-16
 ==================
 
