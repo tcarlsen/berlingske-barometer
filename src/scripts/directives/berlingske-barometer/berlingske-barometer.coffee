@@ -9,11 +9,10 @@ angular.module "berlingskeBarometerDirective", []
 
       scope.switchView = (view) -> $rootScope.view = view
       scope.showUncertainty = ->
-        rects = document.getElementsByClassName "party-uncertainty"
+        rects = d3.selectAll ".party-uncertainty"
+        hasClass = rects.classed "ng-hide"
 
-        for i of rects
-          if rects.hasOwnProperty i
-            angular.element(rects[i]).toggleClass "ng-hide"
+        rects.classed "ng-hide", !hasClass
 
       getLatestPoll = (year) ->
         pollGetter.get(year, "10.xml").then (data) ->
