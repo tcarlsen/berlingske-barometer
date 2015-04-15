@@ -277,22 +277,22 @@ angular.module "partyChartDirective", []
         big = null
         small = null
 
-        if data.one.entries.length > data.two.entries.length
+        if data.one.blokEntries.length > data.two.blokEntries.length
           big = "one"
           small = "two"
-        else if data.one.entries.length < data.two.entries.length
+        else if data.one.blokEntries.length < data.two.blokEntries.length
           big = "two"
           small = "one"
 
         if big and small
-          loopCount = data[big].entries.length - 1
+          loopCount = data[big].blokEntries.length - 1
 
           for i in [0..loopCount]
-            if data[small].entries[i].party.letter isnt data[big].entries[i].party.letter
-              data[small].entries.splice i, 0, {
+            if data[small].blokEntries[i].party.letter isnt data[big].blokEntries[i].party.letter
+              data[small].blokEntries.splice i, 0, {
                 "percent": 0
                 "mandates": "0"
-                "party": data[big].entries[i].party
+                "party": data[big].blokEntries[i].party
               }
 
         svgWidth = d3.select(element[0])[0][0].offsetWidth
@@ -321,11 +321,11 @@ angular.module "partyChartDirective", []
         pollTwoDonutInnerRadius = pollTwoDonutRadius - donutTwoWidth
 
         if firstRun
-          pollOne = baseSvg.append("g").attr("id", "pollOne").data([data.one.entries]).attr "transform", "translate(#{frameWidth}, #{frameHight})"
-          pollTwo = baseSvg.append("g").attr("id", "pollTwo").data([data.two.entries]).attr "transform", "translate(#{frameWidth}, #{frameHight})"
+          pollOne = baseSvg.append("g").attr("id", "pollOne").data([data.one.blokEntries]).attr "transform", "translate(#{frameWidth}, #{frameHight})"
+          pollTwo = baseSvg.append("g").attr("id", "pollTwo").data([data.two.blokEntries]).attr "transform", "translate(#{frameWidth}, #{frameHight})"
         else
-          pollOne = d3.select("#pollOne").data([data.one.entries])
-          pollTwo = d3.select("#pollTwo").data([data.two.entries])
+          pollOne = d3.select("#pollOne").data([data.one.blokEntries])
+          pollTwo = d3.select("#pollTwo").data([data.two.blokEntries])
 
         pollOneArc = d3.svg.arc().outerRadius(pollOneDonutRadius).innerRadius(pollOneDonutInnerRadius)
         pollTwoArc = d3.svg.arc().outerRadius(pollTwoDonutRadius).innerRadius(pollTwoDonutInnerRadius)

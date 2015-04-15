@@ -1,14 +1,15 @@
 angular.module "pollSorterService", []
-  .service "pollSorter", ->
+  .service "pollSorter", ($filter) ->
     sort: (data) ->
-      poll =
-        entries: []
+      poll = {}
       firstBlock =
+        entries: []
         letters: []
         total:
           percent: 0
           mandates: 0
       secondBlock =
+        entries: []
         letters: []
         total:
           percent: 0
@@ -20,13 +21,13 @@ angular.module "pollSorterService", []
       for entry in poll.result.entries.entry
         supports = parseInt(entry.supports)
 
-        poll.entries.push(entry)
-
         if supports is 1 or supports is 9
+          firstBlock.entries.push(entry)
           firstBlock.letters.push(entry.party.letter)
           firstBlock.total.percent += parseFloat entry.percent
           firstBlock.total.mandates += parseFloat entry.mandates
         else if supports is 2
+          secondBlock.entries.push(entry)
           secondBlock.letters.push(entry.party.letter)
           secondBlock.total.percent += parseFloat entry.percent
           secondBlock.total.mandates += parseFloat entry.mandates
@@ -34,7 +35,11 @@ angular.module "pollSorterService", []
         if supports is 9
           ruler = "red" if entry.party.letter is "A"
 
+        firstBlock.entries = $filter('orderBy')(firstBlock.entries, 'party.letter')
+        secondBlock.entries = $filter('orderBy')(secondBlock.entries, 'party.letter')
+
       if ruler is "red"
+        poll.blokEntries = firstBlock.entries.concat secondBlock.entries
         poll.totals = [
           {
             percent: firstBlock.total.percent.toFixed(1)
@@ -54,6 +59,7 @@ angular.module "pollSorterService", []
           }
         ]
       else
+        poll.blokEntries = secondBlock.entries.concat firstBlock.entries
         poll.totals = [
           {
             percent: secondBlock.total.percent
@@ -73,6 +79,7 @@ angular.module "pollSorterService", []
           }
         ]
 
+      poll.entries = angular.copy poll.blokEntries
       poll.entries.sort (a, b) ->
         a = a.party.letter
         b = b.party.letter
