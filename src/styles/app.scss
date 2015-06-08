@@ -111,7 +111,7 @@ berlingske-barometer {
     @media (min-width: 1200px) {
       &.percent,
       &.mandates {
-        width: 1140px - $total-chart-width - $charts-margin;
+        width: 940px - $total-chart-width - $charts-margin;
       }
     }
 
