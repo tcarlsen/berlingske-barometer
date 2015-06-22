@@ -1,4 +1,13 @@
 
+0.4.0 / 2015-06-22
+==================
+
+  * adding d3-tip for uncertainty
+  * adding info to the uncertainty buttons
+  * the uncertainty is now placed correct
+  * new description text for poll of polls
+  * :cry::cry::cry::cry: *(politiko dropped the large view, to make room for banners)*
+
 0.3.3 / 2015-05-28
 ==================
 
