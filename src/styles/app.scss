@@ -415,3 +415,10 @@ berlingske-barometer {
     }
   }
 }
+
+.d3-tip {
+  background: #fff;
+  border: 1px solid #ccc;
+  padding: 2px 7px;
+  pointer-events: none;
+}

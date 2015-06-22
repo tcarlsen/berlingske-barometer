@@ -1,5 +1,5 @@
 angular.module "partyChartDirective", []
-  .directive "partyChart", ($window) ->
+  .directive "partyChart", ($window, $filter) ->
     restrict: "E"
     scope:
       data: "="
@@ -40,6 +40,16 @@ angular.module "partyChartDirective", []
       baseSvg = d3.select(element[0]).append "svg"
         .attr "width", "100%"
         .attr "height", svgHeight + svgPadding.top + svgPadding.bottom
+
+      tip = d3.tip()
+        .attr "class", "d3-tip"
+        .html (d) ->
+          uncertainty = $filter('number')(d.uncertainty)
+          html = "±#{uncertainty}%"
+
+          return html
+
+      baseSvg.call tip
 
       $window.onresize = -> scope.$apply()
 
@@ -229,6 +239,8 @@ angular.module "partyChartDirective", []
               .attr "class", "poll-one party-uncertainty ng-hide"
               .attr "height", 0
               .attr "y", (d) -> yScale parseFloat(d[key]) + (parseFloat(d['uncertainty']) / 2)
+              .on "mouseover", (d) -> tip.show d
+              .on "mouseout", -> tip.hide()
 
         pollOneUncertainty
           .attr "width", columnWidth
