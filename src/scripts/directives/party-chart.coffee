@@ -228,14 +228,14 @@ angular.module "partyChartDirective", []
             .append "rect"
               .attr "class", "poll-one party-uncertainty ng-hide"
               .attr "height", 0
-              .attr "y", (d) -> yScale d[key]
+              .attr "y", (d) -> yScale parseFloat(d[key]) + (parseFloat(d['uncertainty']) / 2)
 
         pollOneUncertainty
           .attr "width", columnWidth
           .attr "x", (d, i) -> (i * columnMargin) + (svgPadding.left / 2)
           .transition().duration(1000)
             .attr "height", (d) -> svgHeight - yScale d['uncertainty']
-            .attr "y", (d) -> yScale d[key]
+            .attr "y", (d) -> yScale parseFloat(d[key]) + (parseFloat(d['uncertainty']) / 2)
 
         pollTwoUncertainty = svg.selectAll(".poll-two.party-uncertainty").data(data.two.entries)
 
@@ -244,14 +244,14 @@ angular.module "partyChartDirective", []
             .append "rect"
               .attr "class", "poll-two party-uncertainty ng-hide"
               .attr "height", 0
-              .attr "y", (d) -> yScale d[key]
+              .attr "y", (d) -> yScale parseFloat(d[key]) + (parseFloat(d['uncertainty']) / 2)
 
         pollTwoUncertainty
           .attr "width", columnWidth
           .attr "x", (d, i) -> (i * columnMargin) + (svgPadding.left / 2) + (columnWidth + compareMargin)
           .transition().duration(1000)
             .attr "height", (d) -> svgHeight - yScale d['uncertainty']
-            .attr "y", (d) -> yScale d[key]
+            .attr "y", (d) -> yScale parseFloat(d[key]) + (parseFloat(d['uncertainty']) / 2)
 
         partyLogos = svg.selectAll(".party-logos").data(data.one.entries)
 
