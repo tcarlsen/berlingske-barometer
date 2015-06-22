@@ -5,6 +5,6 @@ angular.module "pollDescriptionFilter", []
       if institute is "Valgresultater"
         output = ""
       else if institute is "Berlingske Poll of Polls"
-        output = "Det vægtede gennemsnit viser et gennemsnit af de #{input} politiske meningsmålinger, der er blevet offentliggjort 31 dage fra den {dato} . Da nye meningsmålinger vejer tungere end ældre, er Barometerets gennemsnit udtryk for en vægtet tendens, som giver dig et mere retvisende bud på partiernes reelle opbakning end enkeltstående meningsmålinger."
+        output = "Berlingske Barometer beregner det vægtede gennemsnit på baggrund af målinger, der er offentliggjort inden for de seneste 31 dage. Herefter tillægges de nyere målinger større indflydelse på gennemsnittet end de ældre. I perioder, hvor der offentliggøres mange målinger, vil barometeret undertrykke ældre målinger yderligere. Her vægtes blandt andet på baggrund af antallet af målinger, respondenter og dage mellem offentliggjorte målinger. I valgperioder kan det for eksempel ske, at målinger, der er ældre end 24 timer, udelukkes fra gennemsnittet. Berlingske Barometer er dermed et udtryk for en aktuel vægtet tendens, som giver dig et mere retvisende bud på partiernes reelle opbakning end enkeltstående meningsmålinger."
 
       return output
